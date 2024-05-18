@@ -2,7 +2,7 @@ const image = document.getElementById("note_img");
 const answers = document.querySelectorAll(".answer");
 console.log(answers);
 
-const notesArray = ["https://picsum.photos/id/237/200/300", "https://picsum.photos/seed/picsum/200/300", "https://picsum.photos/200/300/", "https://picsum.photos/id/870/200/300/", "https://picsum.photos/200/300?grayscale"];
+const notesArray = ["/assets/treble-note-a.png", "/assets/treble-note-b.png", "/assets/treble-note-c.png", "/assets/treble-note-d.png", "/assets/treble-note-e.png", "/assets/treble-note-f.png", "/assets/treble-note-g.png"];
 
 function newNote(array) {
     const noteIndex = Math.floor(Math.random() * array.length);
