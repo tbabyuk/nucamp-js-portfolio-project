@@ -13,8 +13,8 @@ class Question {
     }
 }
 
-const A = new Question("/assets/treble-note-a.png", ["A", "B", "C"], "A");
-const B = new Question("/assets/treble-note-b.png", ["B", "C", "D"], "B");
+const A = new Question("assets/treble-note-a.png", ["A", "B", "C"], "A");
+const B = new Question("assets/treble-note-b.png", ["B", "C", "D"], "B");
 const C = new Question("https://picsum.photos/id/239/200/300", ["D", "C", "E"], "C");
 const D = new Question("https://picsum.photos/id/240/200/300", ["D", "E", "F"], "D");
 const E = new Question("https://picsum.photos/id/241/200/300", ["E", "F", "G"], "E");
