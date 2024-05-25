@@ -1,6 +1,8 @@
 const image = document.getElementById("note_img");
 const answers = document.querySelectorAll(".answer");
 const radioBtns = document.querySelectorAll(".radio_btn");
+
+
 let answerChoice = "";
 let noteIndex;
 
@@ -15,11 +17,11 @@ class Question {
 
 const A = new Question("/assets/treble-note-a.png", ["A", "B", "C"], "A");
 const B = new Question("/assets/treble-note-b.png", ["B", "C", "D"], "B");
-const C = new Question("https://picsum.photos/id/239/200/300", ["D", "C", "E"], "C");
-const D = new Question("https://picsum.photos/id/240/200/300", ["D", "E", "F"], "D");
-const E = new Question("https://picsum.photos/id/241/200/300", ["E", "F", "G"], "E");
-const F = new Question("https://picsum.photos/id/242/200/300", ["F", "G", "A"], "F");
-const G = new Question("https://picsum.photos/id/243/200/300", ["G", "A", "B"], "G");
+const C = new Question("/assets/treble-note-c.png", ["D", "C", "E"], "C");
+const D = new Question("/assets/treble-note-d.png", ["D", "E", "F"], "D");
+const E = new Question("/assets/treble-note-e.png", ["E", "F", "G"], "E");
+const F = new Question("/assets/treble-note-f.png", ["F", "G", "A"], "F");
+const G = new Question("/assets/treble-note-g.png", ["G", "A", "B"], "G");
 
 const questions = [A, B, C, D, E, F, G];
 
