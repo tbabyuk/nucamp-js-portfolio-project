@@ -36,12 +36,34 @@
     height: 150px;
 }
 
-#answers_choices {
+#answers_form {
     margin: auto;
-    margin-top: 40px;
     width: fit-content;
+    margin-top: 40px;
+    display: flex;
+    flex-direction: column;
+}
+
+#answers_form > label {
+    display: flex;
+
 }
 
 #answers_choices h3 {
     padding-bottom: 20px;
+}
+
+.radio_btn {
+    margin-right: 8px;
+    cursor: pointer;
+}
+
+#submit_btn {
+    margin-top: 10px;
+}
+
+#results_btn {
+    display: none;
+    margin: auto;
+    margin-top: 20px;
 }
