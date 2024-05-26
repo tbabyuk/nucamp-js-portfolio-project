@@ -34,8 +34,10 @@ showNote(notesArray);
 
 function showNote(array) {
 
+    // if the array lengths are the same, that means all notes have already been shown to the user
     if(notesDisplayed.length === array.length) {
         console.log("All notes have been displayed!")
+        showResults();
         form.style.display = "none";
         resultsBtn.style.display = "block";
         return;
@@ -62,28 +64,27 @@ function showNote(array) {
 }
 
 
-form.addEventListener("submit", recordUserAnswer);
 
+form.addEventListener("submit", submitAndRecordUserAnswer);
 
 const userAnswersArray = [];
 
-function recordUserAnswer(e) {
+function submitAndRecordUserAnswer(e) {
     e.preventDefault();
     if (userAnswersArray.length === 7) {
-        showResults();
         return;
     }
-    // const selectedOption = form[]
     const userSelection = form.querySelector('input[type="radio"]:checked');
-    // console.log("logging user answer", userSelection.value);
     userAnswersArray.push(userSelection.value);
-    console.log("userAnswersArray:", userAnswersArray);
+    console.log(userAnswersArray);
     showNote(notesArray);
 }
-
 
 function showResults() {
     console.log("show Results fired", userAnswersArray);
 }
 
 // function to check answer and hold answers in an array
+
+
+
