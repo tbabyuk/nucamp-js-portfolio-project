@@ -12,25 +12,29 @@
         <h1>Name That Note!</h1>
     </header>
     <main id="main">
-        <div id="image-container">
-            <img id="note_img" src="" alt="Music Note">
+        <div id ="display_questions">
+            <div id="image-container">
+                <img id="note_img" src="" alt="Music Note">
+            </div>
+            <form id="answers_form">
+                <label>
+                    <input class="radio_btn" type="radio" name="choice_btn" value="A">
+                    <span class="note_label">A</span>
+                </label>
+                <label>
+                    <input class="radio_btn" type="radio" name="choice_btn" value="">
+                    <span class="note_label">B</span>
+                </label>
+                <label>
+                    <input class="radio_btn" type="radio" name="choice_btn" value="">
+                    <span class="note_label">C</span>
+                </label>
+                <button id="submit_btn">Submit</button>
+            </form>
+            <button id="results_btn">View Results</button>
         </div>
-        <form id="answers_form">
-            <label>
-                <input class="radio_btn" type="radio" name="choice_btn" value="A">
-                <span class="note_label">A</span>
-            </label>
-            <label>
-                <input class="radio_btn" type="radio" name="choice_btn" value="">
-                <span class="note_label">B</span>
-            </label>
-            <label>
-                <input class="radio_btn" type="radio" name="choice_btn" value="">
-                <span class="note_label">C</span>
-            </label>
-            <button id="submit_btn">Submit</button>
-        </form>
-        <button id="results_btn">View Results</button>
+
+        <div id="display_results"></div>
     </main>
     <footer id="footer">&copy; 2024 | Jessica & Terry | Nucamp | JavaScript Fundamentals</footer>
 

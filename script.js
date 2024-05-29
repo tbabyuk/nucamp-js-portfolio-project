@@ -5,13 +5,16 @@ const answerLabels = document.querySelectorAll(".note_label");
 const form = document.getElementById("answers_form");
 const submitBtn = document.getElementById("submit_btn");
 const resultsBtn = document.getElementById("results_btn");
+const resultsDiv = document.getElementById("display_results");
+const questionsDiv = document.getElementById("display_questions");
 
 
 class Note {
-    constructor(noteImage, noteName, answerOptions) {
+    constructor(noteImage, noteName, answerOptions, answerSubmitted = null) {
         this.noteImage = noteImage;
         this.noteName = noteName;
         this.answerOptions = answerOptions;
+        this.answerSubmitted = answerSubmitted;
     }
 }
 
@@ -26,14 +29,14 @@ const noteG = new Note("/assets/treble-note-g.png", "G", ["G", "B", "A"]);
 
 
 const notesArray = [noteA, noteB, noteC, noteD, noteE, noteF, noteG];
-
 const notesDisplayed = [];
+const notesDisplayedIndex = [];
+let currentNote = null;
 
 showNote(notesArray);
 
 
 function showNote(array) {
-
     // if the array lengths are the same, that means all notes have already been shown to the user
     if(notesDisplayed.length === array.length) {
         console.log("All notes have been displayed!")
@@ -44,14 +47,14 @@ function showNote(array) {
     }
 
     const randomNoteIndex = Math.floor(Math.random() * array.length);
-    const currentNote = array[randomNoteIndex];
-
+    currentNote = array[randomNoteIndex];
 
     if(!notesDisplayed.includes(currentNote.noteName)) {
 
         noteImage.src=currentNote.noteImage;
 
         notesDisplayed.push(currentNote.noteName);
+        notesDisplayedIndex.push(randomNoteIndex);
 
         answerOptions.forEach((option, index) => {
             option.value = currentNote.answerOptions[index];
@@ -60,31 +63,67 @@ function showNote(array) {
         })
     } else {
         showNote(notesArray);
-    }
+    } 
 }
-
-
 
 form.addEventListener("submit", submitAndRecordUserAnswer);
 
-const userAnswersArray = [];
+// const userAnswersArray = [];
 
 function submitAndRecordUserAnswer(e) {
     e.preventDefault();
-    if (userAnswersArray.length === 7) {
-        return;
-    }
+    // if (userAnswersArray.length === 7) {
+    //     return;
+    // }
     const userSelection = form.querySelector('input[type="radio"]:checked');
-    userAnswersArray.push(userSelection.value);
-    console.log(userAnswersArray);
+    currentNote.answerSubmitted = userSelection.value;
+    console.log(currentNote.answerSubmitted);
+
+    // userAnswersArray.push(userSelection.value);
+    // console.log(userAnswersArray);
     showNote(notesArray);
 }
 
 function showResults() {
-    console.log("show Results fired", userAnswersArray);
+    questionsDiv.style.display = 'none';
+    let score = checkAnswers();
+    const finalScore = document.createElement('h1');
+    finalScore.innerText = `You got ${score} answers correct!`;
+    resultsDiv.insertBefore(finalScore, resultsDiv.firstChild);
+    console.log(finalScore);
+
 }
 
-// function to check answer and hold answers in an array
+// function to check answer
+function checkAnswers() {
+    
+    let score = 0;
+    resultMessage = "";
+    for (const index of notesDisplayedIndex) {
+        const question = notesArray[index];
+        console.log(question);
+        const resultImg = document.createElement('img');
+        const resultP = document.createElement('p');
+
+        if (question.noteName === question.answerSubmitted) {
+            resultMessage = `Correct! You chose ${question.answerSubmitted}.`;
+            console.log(resultMessage);
+            resultP.style.backgroundColor = 'green';
+            score++;
+        } else {
+            resultMessage = `Incorrect. The correct answer is ${question.noteName}. You chose ${question.answerSubmitted}.`;
+            console.log(resultMessage);
+            resultP.style.backgroundColor = 'red';
+        }
+
+        resultImg.src = question.noteImage;
+        resultP.innerText = resultMessage;
+        resultsDiv.appendChild(resultImg);
+        resultsDiv.appendChild(resultP);
+    }
+
+    return score;
+}
 
 
 
