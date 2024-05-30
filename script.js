@@ -4,8 +4,8 @@ const answerOptions = document.querySelectorAll(".radio_btn");
 const answerLabels = document.querySelectorAll(".note_label");
 const form = document.getElementById("answers_form");
 const submitBtn = document.getElementById("submit_btn");
-const resultsBtn = document.getElementById("results_btn");
-const resultsDiv = document.getElementById("display_results");
+// const resultsBtn = document.getElementById("results_btn");
+const resultsContainer = document.getElementById("display_results");
 const questionsDiv = document.getElementById("display_questions");
 
 
@@ -19,13 +19,13 @@ class Note {
 }
 
 
-const noteA = new Note("/assets/treble-note-a.png", "A", ["A", "D", "C"]);
-const noteB = new Note("/assets/treble-note-b.png", "B", ["G", "B", "D"]);
-const noteC = new Note("/assets/treble-note-c.png", "C", ["C", "F", "E"]);
-const noteD = new Note("/assets/treble-note-d.png", "D", ["D", "A", "F"]);
-const noteE = new Note("/assets/treble-note-e.png", "E", ["C", "E", "G"]);
-const noteF = new Note("/assets/treble-note-f.png", "F", ["D", "C", "F"]);
-const noteG = new Note("/assets/treble-note-g.png", "G", ["G", "B", "A"]);
+const noteA = new Note("assets/treble-note-a.png", "A", ["A", "D", "C"]);
+const noteB = new Note("assets/treble-note-b.png", "B", ["G", "B", "D"]);
+const noteC = new Note("assets/treble-note-c.png", "C", ["C", "F", "E"]);
+const noteD = new Note("assets/treble-note-d.png", "D", ["D", "A", "F"]);
+const noteE = new Note("assets/treble-note-e.png", "E", ["C", "E", "G"]);
+const noteF = new Note("assets/treble-note-f.png", "F", ["D", "C", "F"]);
+const noteG = new Note("assets/treble-note-g.png", "G", ["G", "B", "A"]);
 
 
 const notesArray = [noteA, noteB, noteC, noteD, noteE, noteF, noteG];
@@ -42,7 +42,7 @@ function showNote(array) {
         console.log("All notes have been displayed!")
         showResults();
         form.style.display = "none";
-        resultsBtn.style.display = "block";
+        // resultsBtn.style.display = "block";
         return;
     }
 
@@ -82,6 +82,8 @@ function submitAndRecordUserAnswer(e) {
     // userAnswersArray.push(userSelection.value);
     // console.log(userAnswersArray);
     showNote(notesArray);
+    answerOptions.forEach(button => button.checked = false);
+    
 }
 
 function showResults() {
@@ -89,7 +91,7 @@ function showResults() {
     let score = checkAnswers();
     const finalScore = document.createElement('h1');
     finalScore.innerText = `You got ${score} answers correct!`;
-    resultsDiv.insertBefore(finalScore, resultsDiv.firstChild);
+    resultsContainer.insertBefore(finalScore, resultsContainer.firstChild);
     console.log(finalScore);
 
 }
@@ -98,10 +100,11 @@ function showResults() {
 function checkAnswers() {
     
     let score = 0;
-    resultMessage = "";
+    let resultMessage = "";
     for (const index of notesDisplayedIndex) {
         const question = notesArray[index];
         console.log(question);
+        const resultCard = document.createElement('div');
         const resultImg = document.createElement('img');
         const resultP = document.createElement('p');
 
@@ -118,8 +121,12 @@ function checkAnswers() {
 
         resultImg.src = question.noteImage;
         resultP.innerText = resultMessage;
-        resultsDiv.appendChild(resultImg);
-        resultsDiv.appendChild(resultP);
+        resultP.classList.add('result-message');
+        resultCard.classList.add('result-card');
+        resultsContainer.appendChild(resultCard);
+        resultCard.appendChild(resultImg);
+        resultCard.appendChild(resultP);
+
     }
 
     return score;
